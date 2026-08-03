@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+
+    <TargetFramework>net9.0</TargetFramework>
+
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <Nullable>enable</Nullable>
+
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+
+    <PackageId>Brainy.Mapper</PackageId>
+
+    <Version>1.0.0</Version>
+
+    <Authors>Shakeel Iqbal</Authors>
+
+    <Company>Brainy Solutions</Company>
+
+    <Product>Brainy.Mapper</Product>
+
+    <Description>
+
+      It is a lightweight, high-performance object mapping library for .NET designed as a simple and efficient alternative to traditional object mappers.
+
+    </Description>
+
+    <PackageTags>
+
+      mapper;automapper;mapping;dotnet
+    </PackageTags>
+
+    <RepositoryUrl>
+      https://github.com/shakeel-iqbal-personal/Brainy.Mapper
+    </RepositoryUrl>
+
+    <RepositoryType>git</RepositoryType>
+
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.10" />
+  </ItemGroup>
+
+</Project>

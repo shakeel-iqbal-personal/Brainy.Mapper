@@ -8,13 +8,23 @@ The project was created to provide developers with a free, fast, and easy-to-use
 
 - 🚀 High-performance object mapping
 - 🔄 Convention-based property mapping
+- ⚡ Lightweight object mapping
 - 🎯 Custom member mapping with `ForMember`
 - 📦 Nested object mapping
 - 📋 Collection and List mapping
-- 🔧 Configurable mapping profiles
+- 🚫 Member ignoring (Ignore)
+- 🔄 Existing object update mapping
 - 💪 Strongly typed lambda expressions
 - 🪶 Lightweight with zero unnecessary dependencies
+- 🧩 Automatic assembly scanning
+- 💉 Dependency Injection support
+- 📈 LINQ ProjectTo() projection support
+- 🌳 Automatic property flattening
+- 🔢 Enum conversion support
+- 🛡️ Null-safe projection mapping
+- 🔧 Configurable mapping profiles
 - 🆓 Completely free and open source
+
 
 ## Why Brainy.Mapper?
 

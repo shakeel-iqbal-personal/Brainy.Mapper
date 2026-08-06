@@ -1,59 +1,271 @@
 # Brainy.Mapper
 
-Brainy.Mapper is a lightweight, high-performance object mapping library for .NET designed as a simple and efficient alternative to traditional object mappers.
+Brainy.Mapper is a lightweight and high-performance object mapping library for .NET 8, 9 & 10.
 
-The project was created to provide developers with a free, fast, and easy-to-use mapping solution without licensing concerns. It supports mapping between objects, nested objects, collections, custom member mappings, and convention-based property mapping while keeping the API clean and familiar.
+It was built to provide a clean, fast, and dependency-light alternative for mapping objects without unnecessary complexity. Whether you're mapping DTOs, entities, nested models, or query projections, Brainy.Mapper keeps the API simple while covering the features commonly required in real-world applications.
+
+The library follows familiar mapping conventions, making it easy to adopt while remaining lightweight and fully open source.
+
+---
 
 ## Features
 
-- 🚀 High-performance object mapping
-- 🔄 Convention-based property mapping
-- ⚡ Lightweight object mapping
-- 🎯 Custom member mapping with `ForMember`
+- 🚀 Fast object-to-object mapping
+- 🎯 Convention-based property mapping
+- 🔄 Custom member mapping with `ForMember()`
 - 📦 Nested object mapping
-- 📋 Collection and List mapping
-- 🚫 Member ignoring (Ignore)
-- 🔄 Existing object update mapping
-- 💪 Strongly typed lambda expressions
-- 🪶 Lightweight with zero unnecessary dependencies
-- 🧩 Automatic assembly scanning
-- 💉 Dependency Injection support
-- 📈 LINQ ProjectTo() projection support
+- 📋 Collection and array mapping
 - 🌳 Automatic property flattening
-- 🔢 Enum conversion support
-- 🛡️ Null-safe projection mapping
-- 🔧 Configurable mapping profiles
-- 🆓 Completely free and open source
+- 🚫 Ignore destination members
+- ✏️ Map onto existing objects
+- 🔢 Automatic enum conversion
+- 📈 LINQ `ProjectTo()` support
+- 💉 Dependency Injection support
+- 🧩 Automatic mapping registration using `IMap<T>`
+- 🛡️ Null-safe projections
+- ⚙️ Configurable mapping profiles
+- 🪶 Lightweight with minimal dependencies
+- 🆓 Free and open source
 
+---
 
-## Why Brainy.Mapper?
+# Why Brainy.Mapper?
 
-Many existing mapping libraries have become commercial or include features that many projects never use. Brainy.Mapper focuses on providing the core functionality developers need while remaining lightweight, performant, and easy to understand.
+Brainy.Mapper was created with one goal in mind:
 
-Whether you're building a small application or a large enterprise solution, Brainy.Mapper aims to provide a clean and reliable mapping experience.
+> Provide the mapping features developers actually use without adding unnecessary complexity.
 
-## Example
+Many mapping libraries have grown significantly over time, introducing features that aren't needed in every project or moving toward commercial licensing. Brainy.Mapper focuses on delivering the core mapping experience in a clean, maintainable, and developer-friendly way.
+
+Whether you're building a small API, a Clean Architecture application, or a large enterprise solution, Brainy.Mapper helps reduce repetitive mapping code while keeping configuration straightforward and easy to understand.
+
+---
+
+# Installation
+
+Install the package from NuGet.
+
+```bash
+dotnet add package Brainy.Mapper
+```
+
+or
+
+```powershell
+Install-Package Brainy.Mapper
+```
+
+---
+
+# Quick Start
+
+## Create a Profile
 
 ```csharp
-var profile = new MapperProfile();
+public class UserProfile : Profile
+{
+    public UserProfile()
+    {
+        CreateMap<User, UserDto>()
+            .ForMember(
+                d => d.FullName,
+                opt => opt.MapFrom(s => s.FirstName + " " + s.LastName));
+    }
+}
+```
 
-profile.CreateMap<User, UserDto>()
-       .ForMember(dest => dest.FullName,
-           opt => opt.MapFrom(src => src.FirstName + " " + src.LastName));
+## Configure the Mapper
 
-var mapper = new Mapper(profile);
+```csharp
+var configuration = new MapperConfiguration(cfg =>
+{
+    cfg.AddProfile<UserProfile>();
+});
 
+var mapper = configuration.CreateMapper();
+```
+
+## Map Objects
+
+```csharp
 UserDto dto = mapper.Map<UserDto>(user);
 ```
 
-## Roadmap
+---
 
-- [x] Object mapping
-- [x] Nested object mapping
-- [x] Collection mapping
-- [x] Custom member mapping
-- [x] Enum mapping
-- [x] Dependency Injection extensions
-- [ ] Reverse mapping
-- [ ] Attribute-based mapping
-- [ ] Constructor mapping
+# Dependency Injection
+
+Brainy.Mapper includes built-in Dependency Injection support.
+
+```csharp
+builder.Services.AddBrainyMapper(
+    Assembly.GetExecutingAssembly());
+```
+
+Then simply inject `IMapper`.
+
+```csharp
+public class UserService
+{
+    private readonly IMapper _mapper;
+
+    public UserService(IMapper mapper)
+    {
+        _mapper = mapper;
+    }
+}
+```
+
+---
+
+# Automatic Mapping Registration
+
+Brainy.Mapper can automatically discover mappings from your assembly using the `IMap<T>` interface.
+
+```csharp
+public class UserMapping : IMap<User>
+{
+    public void Mapping(Profile profile)
+    {
+        profile.CreateMap<User, UserDto>();
+    }
+}
+```
+
+No manual registration of every mapping class is required.
+
+---
+
+# Collection Mapping
+
+```csharp
+List<UserDto> users =
+    mapper.Map<List<UserDto>>(entities);
+```
+
+---
+
+# Nested Object Mapping
+
+```csharp
+public class Department
+{
+    public string Name { get; set; }
+}
+
+public class Student
+{
+    public Department Department { get; set; }
+}
+```
+
+```csharp
+public class StudentDto
+{
+    public DepartmentDto Department { get; set; }
+}
+```
+
+Nested objects are mapped automatically when a mapping exists for both types.
+
+---
+
+# Property Flattening
+
+Brainy.Mapper automatically supports property flattening.
+
+```csharp
+public class Student
+{
+    public Department Department { get; set; }
+}
+```
+
+```csharp
+public class StudentDto
+{
+    public string DepartmentName { get; set; }
+}
+```
+
+No additional configuration is required.
+
+---
+
+# Custom Member Mapping
+
+```csharp
+CreateMap<User, UserDto>()
+    .ForMember(
+        d => d.FullName,
+        opt => opt.MapFrom(
+            s => s.FirstName + " " + s.LastName));
+```
+
+---
+
+# Ignore Members
+
+```csharp
+CreateMap<User, UserDto>()
+    .ForMember(
+        d => d.Password,
+        opt => opt.Ignore());
+```
+
+---
+
+# Mapping to Existing Objects
+
+```csharp
+mapper.Map(updateRequest, existingEntity);
+```
+
+Useful for update operations where an existing entity should be modified instead of creating a new instance.
+
+---
+
+# ProjectTo
+
+Project directly from an `IQueryable` without materializing entities first.
+
+```csharp
+var users = context.Users
+    .ProjectTo<UserDto>(mapper)
+    .ToList();
+```
+
+This allows only the required columns to be selected by the underlying query provider.
+
+---
+
+# Roadmap
+
+- ✅ Object Mapping
+- ✅ Nested Object Mapping
+- ✅ Collection Mapping
+- ✅ Property Flattening
+- ✅ Custom Member Mapping
+- ✅ Ignore Members
+- ✅ Existing Object Mapping
+- ✅ Enum Conversion
+- ✅ Dependency Injection
+- ✅ Assembly Scanning
+- ✅ ProjectTo Support
+- ⏳ Reverse Mapping
+- ⏳ Constructor Mapping
+- ⏳ Attribute-Based Mapping
+
+---
+
+# Contributing
+
+Contributions, bug reports, feature suggestions, and pull requests are always welcome.
+
+If you find an issue or have an idea for improvement, feel free to open an issue on GitHub.
+
+---
+
+# License
+
+Brainy.Mapper is released under the MIT License.

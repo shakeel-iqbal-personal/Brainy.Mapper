@@ -2,7 +2,7 @@
 
   <PropertyGroup>
 
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
 
     <ImplicitUsings>enable</ImplicitUsings>
 
@@ -12,7 +12,7 @@
 
     <PackageId>Brainy.Mapper</PackageId>
 
-    <Version>1.0.1</Version>
+    <Version>1.0.3</Version>
 
     <Authors>Shakeel Iqbal</Authors>
 

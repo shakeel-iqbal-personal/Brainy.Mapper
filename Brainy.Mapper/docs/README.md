@@ -266,21 +266,14 @@ If you find an issue or have an idea for improvement, feel free to open an issue
 
 ---
 
-Author
-
-Brainy.Mapper is created and maintained by Shakeel Iqbal, a Senior .NET Architect and C# Developer with extensive experience building enterprise applications and software solutions using the Microsoft technology stack.
-
-LinkedIn: Shakeel Iqbal
-Company: Brainy Solutions
-
-If you find Brainy.Mapper useful, feel free to ⭐ star the repository, report issues, suggest improvements, or contribute through a pull request.
-
-
 # Author
 
-- **Shakeel Iqbal**
-  - LinkedIn: [Shakeel Iqbal](https://www.linkedin.com/in/shakeel-iqbal1/)
-  - Company: [Brainy Solutions](https://www.brainy-solutions.com/)
+Brainy.Mapper is created and maintained by **Shakeel Iqbal**, a Senior .NET Architect and C# Developer with extensive experience building enterprise applications and software solutions using the Microsoft technology stack.
+
+- LinkedIn: [Shakeel Iqbal](https://www.linkedin.com/in/shakeel-iqbal1/)
+- Company: [Brainy Solutions](https://www.brainy-solutions.com/)
+
+If you find Brainy.Mapper useful, feel free to ⭐ star the repository, report issues, suggest improvements, or contribute through a pull request.
 
 ---
 

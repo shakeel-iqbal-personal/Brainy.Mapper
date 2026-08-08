@@ -41,18 +41,18 @@
 
     <PackageReadmeFile>README.md</PackageReadmeFile>
 
-    <PackageIcon>brainy-mapper-icon.png</PackageIcon>
+    <PackageIcon>icon.png</PackageIcon>
 
     <Title>Brainy Mapper</Title>
 
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="docs\README.md" Pack="true" PackagePath="\" />
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="docs\brainy-mapper-icon.png" Pack="true" PackagePath="\" />
+    <None Include="docs\icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
